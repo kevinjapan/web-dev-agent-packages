@@ -39,8 +39,9 @@ class WedDevAgentPackages {
    public function create_package_post_type() {
 
       $labels = array(
-         'name' => __('Packages','web-dev-agent'),
-         'singular_name' =>  __('Package','web-dev-agent')
+         'name' => __('WDA Packages','web-dev-agent'),
+         'singular_name' =>  __('WDA Package','web-dev-agent'),
+         'menu_name' => 'Packages',
       );
       $args = array(
          'labels' => $labels,
@@ -69,8 +70,6 @@ class WedDevAgentPackages {
    //
    public function enqueue_assets() 
    {
-      // to do : verfiy - does WP enqueue cleanly handle my plugins all using the same css files?
-
       wp_enqueue_style(
          'wda_outline',
          plugin_dir_url( __FILE__ ) . 'css/outline.css',
@@ -140,7 +139,18 @@ class WedDevAgentPackages {
 
    // future : we want this list configurable by site owner
    private function get_features_list() {
-      return array('wireframes','responsive','workshop','seo');
+      return array(
+         'custom design',
+         'wireframes',
+         'responsive',
+         '5 pages',
+         '10 pages',
+         'workshop',
+         'seo',
+         'email',
+         'hosting support',
+         'training',
+      );
    }
 
    public function render_package_meta_box($post) {
@@ -166,13 +176,6 @@ class WedDevAgentPackages {
       </ul>
       <?php
    }
-
-   // to do : research
-   // stackexchange - "Store custom meta box data as serialized array" - see discussion
-   //
-   // - you can have more than one meta value with the same key - meta keys are not unique
-   //   eg $cars = get_post_meta($post_id,'car',false);
-   //      foreach($cars as $car) ...
 
 	public function save_custom_meta($post_id) {
 

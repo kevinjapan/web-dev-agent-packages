@@ -70,34 +70,34 @@ class WedDevAgentPackages {
    //
    public function enqueue_assets() 
    {
-      wp_enqueue_style(
-         'wda_outline',
-         plugin_dir_url( __FILE__ ) . 'css/outline.css',
-         array(),
-         1,
-         'all'
-      );  
-      wp_enqueue_style(
-         'wda_outline_layouts',
-         plugin_dir_url( __FILE__ ) . 'css/outline-layouts.css',
-         array(),
-         1,
-         'all'
-      );  
-      wp_enqueue_style(
-         'wda_outline_custom_props',
-         plugin_dir_url( __FILE__ ) . 'css/outline-custom-props.css',
-         array(),
-         1,
-         'all'
-      );  
-      wp_enqueue_style(
-         'wda_outline_utilities',
-         plugin_dir_url( __FILE__ ) . 'css/outline-utilities.css',
-         array(),
-         1,
-         'all'
-      ); 
+      // wp_enqueue_style(
+      //    'wda_outline',
+      //    plugin_dir_url( __FILE__ ) . 'css/outline.css',
+      //    array(),
+      //    1,
+      //    'all'
+      // );  
+      // wp_enqueue_style(
+      //    'wda_outline_layouts',
+      //    plugin_dir_url( __FILE__ ) . 'css/outline-layouts.css',
+      //    array(),
+      //    1,
+      //    'all'
+      // );  
+      // wp_enqueue_style(
+      //    'wda_outline_custom_props',
+      //    plugin_dir_url( __FILE__ ) . 'css/outline-custom-props.css',
+      //    array(),
+      //    1,
+      //    'all'
+      // );  
+      // wp_enqueue_style(
+      //    'wda_outline_utilities',
+      //    plugin_dir_url( __FILE__ ) . 'css/outline-utilities.css',
+      //    array(),
+      //    1,
+      //    'all'
+      // ); 
       // wp_enqueue_script(
       //    'web-dev-agent',
       //    plugin_dir_url( __FILE__ ) . 'js/web-dev-agent.js',
@@ -248,7 +248,7 @@ class WedDevAgentPackages {
                         ?>
                      </ul>
                   </div>
-                  <button><a href="<?php echo get_permalink(get_the_ID()); ?>">Read More</a></button>
+                  <button><a href="<?php echo get_permalink(get_the_ID()); ?>">Details</a></button>
                </li>
             <?php
          }

@@ -23,6 +23,7 @@ class WedDevAgentPackages {
 
       // assets
       add_action('wp_enqueue_scripts',array($this,'enqueue_assets'));
+      add_action('admin_enqueue_scripts', array($this,'enqueue_admin_assets'));
 
       // 'edit post' page
 		add_action('add_meta_boxes', array( $this,'add_package_meta_box')); 
@@ -67,43 +68,12 @@ class WedDevAgentPackages {
    //
    // assets
    //
-   public function enqueue_assets() 
-   {
-      // wp_enqueue_style(
-      //    'wda_outline',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // );  
-      // wp_enqueue_style(
-      //    'wda_outline_layouts',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline-layouts.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // );  
-      // wp_enqueue_style(
-      //    'wda_outline_custom_props',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline-custom-props.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // );  
-      // wp_enqueue_style(
-      //    'wda_outline_utilities',
-      //    plugin_dir_url( __FILE__ ) . 'css/outline-utilities.css',
-      //    array(),
-      //    1,
-      //    'all'
-      // ); 
-      // wp_enqueue_script(
-      //    'web-dev-agent',
-      //    plugin_dir_url( __FILE__ ) . 'js/web-dev-agent.js',
-      //    array('jquery'),
-      //    1,
-      //    true
-      // );
+   public function enqueue_assets() {
+
+   }
+   public function enqueue_admin_assets() { 
+      wp_register_style('wda_custom_wp_admin_css',plugin_dir_url( __FILE__ ) . 'css/wda-admin-style.css',array(),1,'all'); 
+      wp_enqueue_style( 'wda_custom_wp_admin_css' );
    }
    
 
@@ -155,24 +125,31 @@ class WedDevAgentPackages {
    public function render_package_meta_box($post) {
 
 		wp_nonce_field('wda_packages_meta_box','wda_packages_meta_nonce');
-
       $all_features = $this->get_features_list();
       $saved_features = (get_post_meta($post->ID,'_features_meta_key',true)) ? get_post_meta($post->ID,'_features_meta_key',true) : array();
 
-      // if (isset($_POST)) die(print_r($custom));     // debug
       ?>
+
       <h3><?php _e('Features','wda-dev-agent_packages');?></h3>
+
       <ul>
          <?php
             foreach ($all_features as $feature) {
                ?>
-               <li><input type="checkbox" name="features_array_fields[]" value="<?php echo $feature;?>" 
-                  <?php echo(in_array($feature,$saved_features) ? ' checked ' : ''); ?>  /><?php echo $feature;?>
+               <li>
+                  <input 
+                     type="checkbox" 
+                     name="features_array_fields[]"
+                     class="wda_checkbox"
+                     value="<?php echo $feature;?>" 
+                     <?php echo(in_array($feature,$saved_features) ? ' checked ' : ''); ?>/>
+                     <?php echo $feature;?>
                </li>
                <?php
             }
          ?>
       </ul>
+
       <?php
    }
 
